@@ -1,0 +1,283 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #ffffff;
+  color: #1e293b;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+header {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1.2rem 0;
+  margin-bottom: 2rem;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10);
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 700;
+  color: #000;
+}
+
+.logo span {
+  display: block;
+  font-size: 16px;
+  color: #155dfc; 
+  margin-top: -5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  color: #000;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-link.active {
+  background-color: #d6e8ff; 
+  color: #155dfc; 
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+}
+
+.user-profile i {
+  font-size: 1.5rem;
+}
+
+.logout {
+  color: #ef4444;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+.logout:hover {
+  background-color: #FFCECE;
+}
+
+.page-title {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+
+.hero-banner {
+  background-color: #d6e8ff;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.sale-info h3 {
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.sale-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #155dfc;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.increase {
+  font-size: 12px;
+  color: #1e293b;
+  font-weight: 600;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.increase i {
+  color: #155dfc;
+  font-size: 30px;
+  margin-bottom: 2px;
+}
+
+.view-details {
+  color: #155dfc;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.btn-primary {
+  background-color: #155dfc; 
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-bottom: 3rem;
+  display: inline-block;
+  transition: background 0.3s;
+}
+.btn-primary:hover {
+  background-color: #0e3bb8;
+}
+
+.transactions-section {
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 1.5rem;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-header h2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.view-all {
+  color: #155dfc; 
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.t-left {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  flex: 1;
+}
+
+.t-info {
+  min-width: 100px;
+}
+
+.t-id {
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-bottom: 4px;
+}
+
+.t-date {
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.t-separator {
+  color: #1e293b;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.t-price {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.badge {
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 90px;
+  justify-content: center;
+}
+
+.badge.qris {
+  background-color: #ffe4e6;
+  color: #f43f5e;
+}
+
+.badge.cash {
+  background-color: #dcfce7;
+  color: #22c55e;
+}
+
+.badge.debit {
+  background-color: #d6e8ff; 
+  color: #155dfc; 
+}

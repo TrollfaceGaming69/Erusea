@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/payment.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Erusea</title>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="order-section">
+            <a href="transaction.html">
+                <div class="back-arrow"><i class="fa-solid fa-arrow-left"></i></div>
+            </a>
+            <div class="order-header">
+                <div class="order-id">
+                    <small style="color:#000000">Order</small>
+                    <h2 id="order-ref">...</h2>
+                    <small style="color:#64748b" id="total-items-count">0 Items</small>
+                </div>
+                <div class="status-pill">Pending</div>
+            </div>
+    
+            <div class="item-list" id="payment-item-list">
+            </div>
+    
+            <div class="summary-footer">
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span style="color:#000; font-weight:600" id="summary-subtotal">Rp 0</span>
+                </div>
+                <div class="summary-row">
+                    <span class="discount">Member Discount (10%)</span>
+                    <span class="discount" id="summary-discount">-Rp 0</span>
+                </div>
+                <hr style="border:0; border-top:1px dashed #cbd5e1; margin:15px 0;">
+                <div class="total-row">
+                    <span>Total Bill</span>
+                    <span id="summary-total">Rp 0</span>
+                </div>
+            </div>
+        </aside>
+        
+        <main class="payment-section">
+            <h3>Payment Method</h3>
+        
+            <div class="method-container">
+                <div class="method-card active" onclick="switchTab('cash', this)">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Cash</span>
+                </div>
+                <div class="method-card" onclick="switchTab('qris', this)">
+                    <i class="fa-solid fa-qrcode"></i>
+                    <span>QRIS</span>
+                </div>
+                <div class="method-card" onclick="switchTab('debit', this)">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <span>Debit</span>
+                </div>
+            </div>
+        
+            <div class="details-header">
+                <span style="font-weight:500">Payment Details</span>
+                <div class="method-badge" id="badge-display"><i class="fa-solid fa-wallet"></i> Cash</div>
+            </div>
+            <small style="color:#64748b">Total Bill</small>
+            <div class="big-total" id="big-display-total">Rp 0</div>
+        
+            <hr style="border:0; border-top:1px solid #e2e8f0; margin-bottom:30px;">
+        
+            <div id="cash-view" class="view-content active">
+                <div class="input-group">
+                    <label>Cash Received</label>
+                    <div class="cash-input-wrapper">
+                        <span class="currency-symbol">Rp</span>
+                        <input type="number" id="input-cash" class="input-box input-with-symbol" placeholder="0">
+                    </div>
+                    <div class="quick-amounts" id="quick-amounts-container">
+                    </div>
+                </div>
+        
+                <div class="change-box">
+                    <span>Change</span>
+                    <span class="change-val" id="change-display">Rp 0</span>
+                </div>
+        
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Recheck all before continuing
+                </div>
+        
+                <div style="margin-top: 40px;">
+                    <button class="pay-btn" onclick="">Pay Now</button>
+                </div>
+            </div>
+        
+            <div id="qris-view" class="view-content">
+                <div style="text-align: center; padding: 40px 0;">
+                    <i class="fa-solid fa-qrcode" style="font-size: 100px; color: #cbd5e1; margin-bottom: 20px;"></i>
+                    <p style="color: #64748b;">Scan QR Code on the Customer Display</p>
+                </div>
+                
+                <div class="warning-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    Wait for the payment to be confirmed
+                </div>
+            </div>
+
+            <div id="debit-view" class="view-content">
+                <div class="input-group">
+                    <label>Card Number</label>
+                    <div class="cash-input-wrapper">
+                        <span class="currency-symbol"><i class="fa-regular fa-credit-card"></i></span>
+                        <input type="text" class="input-box input-with-symbol" placeholder="0000 0000 0000 0000">
+                    </div>
+                </div>
+            
+                <div class="input-group">
+                    <label>Card Holder Name</label>
+                    <input type="text" class="input-box" placeholder="Name">
+                </div>
+            
+                <div class="card-grid">
+                    <div class="input-group">
+                        <label>Valid Period</label>
+                        <input type="text" class="input-box" placeholder="MM/YY">
+                    </div>
+                    <div class="input-group">
+                        <label>CVC / CVV</label>
+                        <input type="password" class="input-box" placeholder="...">
+                    </div>
+                </div>
+            
+                <div style="margin-top: 20px;">
+                    <button class="pay-btn">Pay Now</button>
+                </div>
+            </div>
+        
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="payment.js"></script>
+</body>
+
+</html>
