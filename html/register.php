@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,9 +34,8 @@
                 <?php unset($_SESSION['error']);
                 endif; ?>
 
-                <form>
                     <form action="../php/register.php" method="POST">
-
+                        
                         <div class="form-group">
                             <label><i class="fa-regular fa-user"></i> Name<span class="required">*</span></label>
                             <input type="text" name="employee_name" placeholder="enter name" required>
@@ -68,7 +71,6 @@
                     <div class="login-link">
                         Already have an account? <a href="login.php">Sign in here</a>
                     </div>
-                </form>
             </div>
         </div>
     </div>

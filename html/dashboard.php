@@ -30,7 +30,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
 
                 <div class="nav-links">
                     <a href="#" class="nav-link active">Dashboard</a>
-                    <a href="#" class="nav-link">Transaction</a>
+                    <a href="transactionhistory.php" class="nav-link">Transaction</a>
                 </div>
 
                 <div class="user-menu">
@@ -38,7 +38,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                         <i class="fa-regular fa-circle-user"></i>
                         <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                     </div>
-                    <div class="logout">
+                    <div class="logout" onclick="window.location.href='../php/logout.php'">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         <span>Logout</span>
                     </div>
@@ -62,9 +62,6 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
                     </div>
                 </div>
             </div>
-            <a href="#" class="view-details">
-                View Details <i class="fa-solid fa-arrow-right"></i>
-            </a>
         </div>
 
         <a href="transaction.html"><button class="btn-primary">
@@ -74,7 +71,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
             <div class="transactions-section">
                 <div class="section-header">
                     <h2>Recent Transactions</h2>
-                    <a href="transactionhistory.html" class="view-all">
+                    <a href="transactionhistory.php" class="view-all">
                         View All <i class="fa-solid fa-arrow-right"></i>
                     </a>
                 </div>

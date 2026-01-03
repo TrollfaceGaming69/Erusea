@@ -119,6 +119,7 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  border-radius: 10px;
   margin-bottom: 2rem;
   position: relative;
   overflow: hidden;
@@ -200,12 +201,17 @@ nav {
 
 .view-all {
   color: #155dfc; 
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 400;
   display: flex;
   align-items: center;
   gap: 5px;
+  transition: transform 0.3s;
 }
+.view-all:hover {
+  transform: scale(1.1);
+}
+
 
 .transaction-list {
   display: flex;

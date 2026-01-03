@@ -21,7 +21,7 @@
                 </div>
 
                 <div class="nav-links">
-                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="dashboard.php" class="nav-link">Dashboard</a>
                     <a href="#" class="nav-link active">Transaction</a>
                 </div>
 
@@ -30,7 +30,7 @@
                         <i class="fa-regular fa-circle-user"></i>
                          <span><?php echo htmlspecialchars($_SESSION['username']); ?></span>
                     </div>
-                    <div class="logout">
+                    <div class="logout" onclick="window.location.href='../php/logout.php'">
                         <i class="fa-solid fa-arrow-right-from-bracket"></i>
                         <span>Logout</span>
                     </div>
