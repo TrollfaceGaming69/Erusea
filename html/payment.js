@@ -1,5 +1,4 @@
-// 1. Helper Format Rupiah
-    const formatRupiah = (number) => {
+const formatRupiah = (number) => {
         return new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
@@ -7,17 +6,15 @@
         }).format(number).replace("IDR", "Rp").trim();
     };
 
-    // 2. Generate Random Order ID (Contoh: JKW + Angka Acak)
+
     document.getElementById('order-ref').innerText = 'JKW' + Math.floor(100 + Math.random() * 900);
 
-    // 3. Ambil Data dari LocalStorage
+
     let storedCart = localStorage.getItem('transactionCart');
     let cart = storedCart ? JSON.parse(storedCart) : [];
 
-    // Variabel global untuk perhitungan
     let grandTotal = 0;
 
-    // 4. Render Item List
     const renderTransactionItems = () => {
         const container = document.getElementById('payment-item-list');
         const countEl = document.getElementById('total-items-count');
@@ -43,29 +40,25 @@
             `;
         });
 
-        // Update Text Items Count
         countEl.innerText = `${totalItems} Items`;
 
-        // 5. Kalkulasi Harga
-        const discountAmount = subtotal * 0.1; // Contoh Diskon 10%
+
+        const discountAmount = subtotal * 0.1; 
         grandTotal = subtotal - discountAmount;
 
-        // Update UI Ringkasan Harga
         document.getElementById('summary-subtotal').innerText = formatRupiah(subtotal);
         document.getElementById('summary-discount').innerText = '-' + formatRupiah(discountAmount);
         document.getElementById('summary-total').innerText = formatRupiah(grandTotal);
         document.getElementById('big-display-total').innerText = formatRupiah(grandTotal);
 
-        // Update Tombol Uang Cepat (Quick Amounts)
         setupQuickAmounts(grandTotal);
     };
 
-    // 6. Setup Tombol Uang Cepat (Quick Amounts)
     const setupQuickAmounts = (total) => {
         const container = document.getElementById('quick-amounts-container');
-        // Opsi uang: Uang Pas, Total + 20rb, Total + 50rb (pembulatan sederhana)
+
         const option1 = total; 
-        const option2 = Math.ceil(total / 50000) * 50000; // Pembulatan ke 50rb terdekat
+        const option2 = Math.ceil(total / 50000) * 50000; 
         const option3 = option2 + 50000;
 
         let html = `<div class="amount-pill" onclick="setInputCash(${option1})">Uang Pas</div>`;
@@ -78,7 +71,6 @@
         container.innerHTML = html;
     };
 
-    // 7. Fungsi Input Uang & Hitung Kembalian
     const inputCashEl = document.getElementById('input-cash');
     const changeDisplayEl = document.getElementById('change-display');
 
@@ -95,30 +87,25 @@
         const cash = parseFloat(cashIn);
         if (isNaN(cash) || cash < grandTotal) {
             changeDisplayEl.innerText = "Rp 0";
-            changeDisplayEl.style.color = "red"; // Indikator kurang
+            changeDisplayEl.style.color = "red"; 
         } else {
             const change = cash - grandTotal;
             changeDisplayEl.innerText = formatRupiah(change);
-            changeDisplayEl.style.color = "#10b981"; // Hijau
+            changeDisplayEl.style.color = "#10b981"; 
         }
     }
 
-    // 8. Fungsi Switch Tab (Metode Pembayaran) - Tetap gunakan yang lama atau ini
-    window.switchTab = function(method, element) {
-        // Hapus class active dari semua card dan view
-        document.querySelectorAll('.method-card').forEach(el => el.classList.remove('active'));
-        document.querySelectorAll('.view-content').forEach(el => el.classList.remove('active'));
+ window.switchTab = function(method, element) {
 
-        // Tambah active ke yang diklik
-        element.classList.add('active');
-        document.getElementById(method + '-view').classList.add('active');
+document.querySelectorAll('.method-card').forEach(el => el.classList.remove('active'));
+document.querySelectorAll('.view-content').forEach(el => el.classList.remove('active'));
 
-        // Update badge text
-        const icon = element.querySelector('i').className;
-        const text = element.querySelector('span').innerText;
-        document.getElementById('badge-display').innerHTML = `<i class="${icon}"></i> ${text}`;
-    };
+element.classList.add('active');
+document.getElementById(method + '-view').classList.add('active');
 
+const icon = element.querySelector('i').className;
+const text = element.querySelector('span').innerText;
+document.getElementById('badge-display').innerHTML = `<i class="${icon}"></i> ${text}`;
+};
 
-    // Jalankan render saat halaman dimuat
-    renderTransactionItems();
+renderTransactionItems();
