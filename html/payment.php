@@ -24,10 +24,10 @@
                 </div>
                 <div class="status-pill">Pending</div>
             </div>
-    
+
             <div class="item-list" id="payment-item-list">
             </div>
-    
+
             <div class="summary-footer">
                 <div class="summary-row">
                     <span>Subtotal</span>
@@ -44,10 +44,10 @@
                 </div>
             </div>
         </aside>
-        
+
         <main class="payment-section">
             <h3>Payment Method</h3>
-        
+
             <div class="method-container">
                 <div class="method-card active" onclick="switchTab('cash', this)">
                     <i class="fa-solid fa-wallet"></i>
@@ -62,16 +62,16 @@
                     <span>Debit</span>
                 </div>
             </div>
-        
+
             <div class="details-header">
                 <span style="font-weight:500">Payment Details</span>
                 <div class="method-badge" id="badge-display"><i class="fa-solid fa-wallet"></i> Cash</div>
             </div>
             <small style="color:#64748b">Total Bill</small>
             <div class="big-total" id="big-display-total">Rp 0</div>
-        
+
             <hr style="border:0; border-top:1px solid #e2e8f0; margin-bottom:30px;">
-        
+
             <div id="cash-view" class="view-content active">
                 <div class="input-group">
                     <label>Cash Received</label>
@@ -82,28 +82,28 @@
                     <div class="quick-amounts" id="quick-amounts-container">
                     </div>
                 </div>
-        
+
                 <div class="change-box">
                     <span>Change</span>
                     <span class="change-val" id="change-display">Rp 0</span>
                 </div>
-        
+
                 <div class="warning-box">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     Recheck all before continuing
                 </div>
-        
+
                 <div style="margin-top: 40px;">
-                    <button class="pay-btn" onclick="">Pay Now</button>
+                    <button class="pay-btn" onclick="processPayment('Cash')">Pay Now</button>
                 </div>
             </div>
-        
+
             <div id="qris-view" class="view-content">
                 <div style="text-align: center; padding: 40px 0;">
                     <i class="fa-solid fa-qrcode" style="font-size: 100px; color: #cbd5e1; margin-bottom: 20px;"></i>
                     <p style="color: #64748b;">Scan QR Code on the Customer Display</p>
                 </div>
-                
+
                 <div class="warning-box">
                     <i class="fa-solid fa-triangle-exclamation"></i>
                     Wait for the payment to be confirmed
@@ -118,12 +118,12 @@
                         <input type="text" class="input-box input-with-symbol" placeholder="0000 0000 0000 0000">
                     </div>
                 </div>
-            
+
                 <div class="input-group">
                     <label>Card Holder Name</label>
                     <input type="text" class="input-box" placeholder="Name">
                 </div>
-            
+
                 <div class="card-grid">
                     <div class="input-group">
                         <label>Valid Period</label>
@@ -134,12 +134,12 @@
                         <input type="password" class="input-box" placeholder="...">
                     </div>
                 </div>
-            
+
                 <div style="margin-top: 20px;">
-                    <button class="pay-btn">Pay Now</button>
+                    <button class="pay-btn" onclick="processPayment('Debit')">Pay Now</button>
                 </div>
             </div>
-        
+
         </main>
     </div>
 

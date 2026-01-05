@@ -5,11 +5,7 @@ const formatRupiah = (number) => {
         style: 'currency',
         currency: 'IDR',
         minimumFractionDigits: 0
-    }).format(number).replace("IDR", "Rp").trim();
-};
-
-const parsePrice = (priceString) => {
-    return parseInt(priceString.replace(/[^0-9]/g, ''));
+    }).format(number);
 };
 
 const renderCart = () => {
@@ -17,7 +13,6 @@ const renderCart = () => {
     const totalElement = document.getElementById('grand-total');
 
     cartContainer.innerHTML = '';
-
     let grandTotal = 0;
 
     cart.forEach((item, index) => {
@@ -27,20 +22,21 @@ const renderCart = () => {
         const itemHTML = document.createElement('div');
         itemHTML.classList.add('order-item');
         itemHTML.innerHTML = `
-                <span class="oi-name">${item.name}</span>
-                <span class="oi-qty">x${item.qty}</span>
-                <span class="oi-price">${formatRupiah(subtotal)}</span>
-                <i class="fa-solid fa-xmark oi-remove" onclick="removeItem(${index})"></i>
-            `;
+            <span class="oi-name">${item.name}</span>
+            <span class="oi-qty">x${item.qty}</span>
+            <span class="oi-price">${formatRupiah(subtotal)}</span>
+            <i class="fa-solid fa-xmark oi-remove" style="cursor:pointer;" onclick="removeItem(${index})"></i>
+        `;
         cartContainer.appendChild(itemHTML);
     });
 
     totalElement.innerText = formatRupiah(grandTotal);
 };
 
+// Pastikan price diparse jadi integer
 const addToCart = (productName, productPrice, productCode) => {
-
     const existingItem = cart.find(item => item.code === productCode);
+    const priceInt = parseInt(productPrice);
 
     if (existingItem) {
         existingItem.qty += 1;
@@ -48,15 +44,14 @@ const addToCart = (productName, productPrice, productCode) => {
         cart.push({
             code: productCode, 
             name: productName,
-            price: productPrice,
+            price: priceInt, 
             qty: 1
         });
     }
-
     renderCart();
 };
 
-const removeItem = (index) => {
+window.removeItem = (index) => {
     cart.splice(index, 1);
     renderCart();
 };
@@ -66,56 +61,69 @@ document.getElementById('clear-cart').addEventListener('click', () => {
     renderCart();
 });
 
+// Event Listener Tombol Add
 document.querySelectorAll('.btn-add').forEach(button => {
     button.addEventListener('click', (e) => {
         const card = e.target.closest('.product-card');
         const name = card.querySelector('.p-name').innerText;
-        const priceText = card.querySelector('.p-price').innerText;
-        const price = parsePrice(priceText);
-
+        
+        // PENTING: Mengambil harga & kode dari atribut data HTML
+        // Pastikan Anda sudah mengedit HTML sesuai instruksi sebelumnya
+        const price = e.target.getAttribute('data-price'); 
         const code = e.target.getAttribute('data-kode'); 
 
         if(!code) {
-            console.error("Lupa kasih data-kode di HTML tombol ini!");
+            console.error("Atribut data-kode hilang pada tombol!");
             return;
         }
+        
+        // Fallback jika lupa tambah data-price di HTML, ambil dari teks manual
+        let finalPrice = price;
+        if (!finalPrice) {
+            const priceText = card.querySelector('.p-price').innerText;
+            finalPrice = priceText.replace(/[^0-9]/g, '');
+        }
 
-        addToCart(name, price, code);
+        addToCart(name, finalPrice, code);
     });
 });
 
+// Event Listener Checkout
 document.getElementById('btn-checkout-action').addEventListener('click', () => {
     if (cart.length === 0) {
-        alert("Cart is still empty!");
+        alert("Keranjang masih kosong!");
         return;
     }
 
     const btnCheckout = document.getElementById('btn-checkout-action');
+    const originalText = btnCheckout.innerText;
     btnCheckout.innerText = "Processing...";
     btnCheckout.disabled = true;
 
     fetch('transaction.php', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart)
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            localStorage.setItem('transactionCart', JSON.stringify(cart));
-            window.location.href = 'payment.html'; 
+            localStorage.setItem('lastTransactionId', data.no_transaksi);
+            alert("Transaksi Berhasil! Stok telah diperbarui.");
+
+            cart = [];
+            renderCart();
+            window.location.href = 'payment.php';
         } else {
-            alert('Failed to update stock: ' + data.message);
-            btnCheckout.innerText = "Checkout";
-            btnCheckout.disabled = false;
+            alert('Gagal: ' + data.message);
         }
     })
     .catch(error => {
         console.error('Error:', error);
-        alert('Failed to connect to database.');
-        btnCheckout.innerText = "Checkout";
+        alert('Terjadi kesalahan sistem.');
+    })
+    .finally(() => {
+        btnCheckout.innerText = originalText;
         btnCheckout.disabled = false;
     });
 });

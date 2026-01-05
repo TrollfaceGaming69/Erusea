@@ -64,7 +64,7 @@ if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
             </div>
         </div>
 
-        <a href="transaction.html"><button class="btn-primary">
+        <a href="transaction.php"><button class="btn-primary">
                 Start a new transaction
             </button>
 

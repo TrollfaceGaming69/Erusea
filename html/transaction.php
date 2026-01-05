@@ -1,3 +1,9 @@
+
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -46,7 +52,7 @@
                         <div class="p-name">Croissant butter filling frozen</div>
                         <div class="p-unit">1 pcs</div>
                     </div>
-                    <button class="btn-add" data-kode="BRD001">Add to list +</button>
+                    <button class="btn-add" data-kode="BRD001" data-price="45000">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -56,7 +62,7 @@
                         <div class="p-name">Onions 500 grams</div>
                         <div class="p-unit">500 grams</div>
                     </div>
-                    <button class="btn-add" data-kode="VGT012">Add to list +</button>
+                    <button class="btn-add" data-kode="VGT012" data-price="17800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -66,7 +72,7 @@
                         <div class="p-name">Whole broiler chicken 800 grams</div>
                         <div class="p-unit">800 grams</div>
                     </div>
-                    <button class="btn-add" data-kode="MT016">Add to list +</button>
+                    <button class="btn-add" data-kode="MT016" data-price="37800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -76,7 +82,7 @@
                         <div class="p-name">Fresh real bottled milk 800 ml</div>
                         <div class="p-unit">800 ml</div>
                     </div>
-                    <button class="btn-add" data-kode="DRY112">Add to list +</button>
+                    <button class="btn-add" data-kode="DRY112" data-price="27800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -86,7 +92,7 @@
                         <div class="p-name">Unpeeled fresh shrimp 500 grams</div>
                         <div class="p-unit">500 grams</div>
                     </div>
-                    <button class="btn-add" data-kode="SF090">Add to list +</button>
+                    <button class="btn-add" data-kode="SF090" data-price="27800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -96,7 +102,7 @@
                         <div class="p-name">Red fresh chili peppers 100 grams</div>
                         <div class="p-unit">100 grams</div>
                     </div>
-                    <button class="btn-add" data-kode="VGT118">Add to list +</button>
+                    <button class="btn-add" data-kode="VGT118" data-price="11800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -106,7 +112,7 @@
                         <div class="p-name">Sirloin steak fresh 400 grams</div>
                         <div class="p-unit">400 grams</div>
                     </div>
-                    <button class="btn-add" data-kode="MT020">Add to list +</button>
+                    <button class="btn-add" data-kode="MT020" data-price="27800">Add to list +</button>
                 </div>
 
                 <div class="product-card">
@@ -116,7 +122,7 @@
                         <div class="p-name">Solid bathing milk soap</div>
                         <div class="p-unit">1 pcs</div>
                     </div>
-                    <button class="btn-add" data-kode="BC012">Add to list +</button>
+                    <button class="btn-add" data-kode="BC012" data-price="14300">Add to list +</button>
                 </div>
 
             </div>
