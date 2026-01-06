@@ -120,6 +120,12 @@ nav {
  background-color: var(--danger-bg);
 }
 
+.back-arrow{
+  font-size: 20px;
+  color: var(--text-gray);
+  cursor: pointer;
+}
+
 .main-layout {
   display: grid;
   grid-template-columns: 2.5fr 1fr;

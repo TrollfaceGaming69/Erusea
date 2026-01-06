@@ -100,7 +100,7 @@ document.getElementById('btn-checkout-action').addEventListener('click', () => {
     btnCheckout.innerText = "Processing...";
     btnCheckout.disabled = true;
 
-    fetch('transaction.php', {
+    fetch('../php/transaction.php', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(cart)
@@ -118,10 +118,7 @@ document.getElementById('btn-checkout-action').addEventListener('click', () => {
             alert('Gagal: ' + data.message);
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Terjadi kesalahan sistem.');
-    })
+    
     .finally(() => {
         btnCheckout.innerText = originalText;
         btnCheckout.disabled = false;

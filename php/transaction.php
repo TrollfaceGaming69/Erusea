@@ -23,7 +23,7 @@ if (empty($cartItems)) {
     exit;
 }
 
-$employeeId = isset($_SESSION['employee_id']) ? $_SESSION['employee_id'] : 1; 
+$employeeId = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null; 
 
 // Generate Nomor Transaksi Unik (Contoh: TRX-20231025-120000)
 $noTransaksi = "TRX-" . date("Ymd-His");
