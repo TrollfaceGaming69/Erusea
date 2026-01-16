@@ -7,16 +7,14 @@ const formatRupiah = (number) => {
 };
 
 let storedCart = localStorage.getItem('transactionCart');
-let transactionId = localStorage.getItem('lastTransactionId');
 let cart = storedCart ? JSON.parse(storedCart) : [];
 let grandTotal = 0;
 
-if (transactionId) {
-    document.getElementById('order-ref').innerText = transactionId;
-} else {
-    document.getElementById('order-ref').innerText = "ERROR-NO-ID";
-    alert("Tidak ada transaksi aktif. Kembali ke menu utama.");
+if (!cart || cart.length === 0) {
+    alert("No items in the cart. Redirecting to transaction page.");
     window.location.href = 'transaction.php';
+} else {
+    document.getElementById('order-ref').innerText = "NEW ORDER";
 }
 
 const renderTransactionItems = () => {
@@ -102,40 +100,48 @@ function calculateChange(cashIn) {
 window.processPayment = function(method) {
 
     if (method === 'Cash') {
-        const cashVal = parseFloat(inputCashEl.value);
+        const cashVal = parseFloat(document.getElementById('input-cash').value);
         if (isNaN(cashVal) || cashVal < grandTotal) {
             alert("Uang tunai kurang!");
             return;
         }
     }
 
-    const btn = document.querySelector('.view-content.active .pay-btn');
+    const activeView = document.querySelector('.view-content.active');
+    const btn = activeView.querySelector('.pay-btn');
     const originalText = btn.innerText;
+
     btn.innerText = "Processing...";
     btn.disabled = true;
 
-    fetch('../php/payment.php', {
+    const payload = {
+        cart: cart,
+        metode_bayar: method,
+        grand_total: grandTotal
+    };
+
+   fetch('../php/payment.php', { 
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            no_transaksi: transactionId,
-            metode_bayar: method
-        })
+        body: JSON.stringify(payload)
     })
     .then(response => response.json())
     .then(data => {
         if (data.status === 'success') {
-            alert("Pembayaran Berhasil! (" + method + ")");
+            document.getElementById('order-ref').innerText = data.no_transaksi;
+            
+            alert("Pembayaran Berhasil!\nNo Transaksi: " + data.no_transaksi);
+
             localStorage.removeItem('transactionCart');
-            localStorage.removeItem('lastTransactionId');
-            window.location.href = 'transaction.php'; 
+            
+            window.location.href = 'confirmation.php'; 
         } else {
             alert("Gagal: " + data.message);
         }
     })
     .catch(err => {
         console.error(err);
-        alert("Terjadi kesalahan koneksi");
+        alert("Terjadi kesalahan koneksi server");
     })
     .finally(() => {
         btn.innerText = originalText;

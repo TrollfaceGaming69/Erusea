@@ -33,7 +33,6 @@ const renderCart = () => {
     totalElement.innerText = formatRupiah(grandTotal);
 };
 
-// Pastikan price diparse jadi integer
 const addToCart = (productName, productPrice, productCode) => {
     const existingItem = cart.find(item => item.code === productCode);
     const priceInt = parseInt(productPrice);
@@ -61,14 +60,11 @@ document.getElementById('clear-cart').addEventListener('click', () => {
     renderCart();
 });
 
-// Event Listener Tombol Add
 document.querySelectorAll('.btn-add').forEach(button => {
     button.addEventListener('click', (e) => {
         const card = e.target.closest('.product-card');
         const name = card.querySelector('.p-name').innerText;
-        
-        // PENTING: Mengambil harga & kode dari atribut data HTML
-        // Pastikan Anda sudah mengedit HTML sesuai instruksi sebelumnya
+
         const price = e.target.getAttribute('data-price'); 
         const code = e.target.getAttribute('data-kode'); 
 
@@ -77,7 +73,6 @@ document.querySelectorAll('.btn-add').forEach(button => {
             return;
         }
         
-        // Fallback jika lupa tambah data-price di HTML, ambil dari teks manual
         let finalPrice = price;
         if (!finalPrice) {
             const priceText = card.querySelector('.p-price').innerText;
@@ -88,39 +83,15 @@ document.querySelectorAll('.btn-add').forEach(button => {
     });
 });
 
-// Event Listener Checkout
 document.getElementById('btn-checkout-action').addEventListener('click', () => {
     if (cart.length === 0) {
-        alert("Keranjang masih kosong!");
+        alert("Cart is still empty!");
         return;
     }
 
-    const btnCheckout = document.getElementById('btn-checkout-action');
-    const originalText = btnCheckout.innerText;
-    btnCheckout.innerText = "Processing...";
-    btnCheckout.disabled = true;
+    localStorage.setItem('transactionCart', JSON.stringify(cart));
 
-    fetch('../php/transaction.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(cart)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success') {
-            localStorage.setItem('lastTransactionId', data.no_transaksi);
-            alert("Transaksi Berhasil! Stok telah diperbarui.");
+    localStorage.removeItem('lastTransactionId');
 
-            cart = [];
-            renderCart();
-            window.location.href = 'payment.php';
-        } else {
-            alert('Gagal: ' + data.message);
-        }
-    })
-    
-    .finally(() => {
-        btnCheckout.innerText = originalText;
-        btnCheckout.disabled = false;
-    });
+    window.location.href = 'payment.php';
 });
